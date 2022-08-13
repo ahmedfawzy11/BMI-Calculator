@@ -1,13 +1,15 @@
+import 'package:bmi_calculator/Components/constants.dart';
+import 'package:bmi_calculator/Widgets/bottom_button.dart';
+import 'package:bmi_calculator/Widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/components/reusable_card.dart';
-import 'package:bmi_calculator/components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
-  ResultsPage(
-      {@required this.interpretation,
-      @required this.bmiResult,
-      @required this.resultText});
+  const ResultsPage({
+    super.key,
+    required this.interpretation,
+    required this.bmiResult,
+    required this.resultText,
+  });
 
   final String bmiResult;
   final String resultText;
@@ -17,7 +19,9 @@ class ResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: const Text(
+          'BMI CALCULATOR',
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,9 +29,11 @@ class ResultsPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(
+                15.0,
+              ),
               alignment: Alignment.bottomLeft,
-              child: Text(
+              child: const Text(
                 'Your Result',
                 style: kTitleTextStyle,
               ),
@@ -36,7 +42,7 @@ class ResultsPage extends StatelessWidget {
           Expanded(
             flex: 5,
             child: ReusableCard(
-              colour: kActiveCardColour,
+              color: kActiveCardColor,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,14 +62,19 @@ class ResultsPage extends StatelessWidget {
                   ),
                 ],
               ),
+              onPress: () {
+                Navigator.pop(context);
+              },
             ),
           ),
           BottomButton(
             buttonTitle: 'RE-CALCULATE',
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pop(
+                context,
+              );
             },
-          )
+          ),
         ],
       ),
     );
