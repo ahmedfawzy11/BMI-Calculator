@@ -1,74 +1,110 @@
-import 'package:bmi_calculator/Components/constants.dart';
-import 'package:bmi_calculator/Widgets/bottom_button.dart';
-import 'package:bmi_calculator/Widgets/reusable_card.dart';
+import 'package:bmi_calculator/Components/BottomContainer_Button.dart';
+import 'package:bmi_calculator/Components/Reusable_Bg.dart';
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
-class ResultsPage extends StatelessWidget {
-  const ResultsPage({
-    super.key,
-    required this.interpretation,
-    required this.bmiResult,
-    required this.resultText,
-  });
-
-  final String bmiResult;
+class ResultPage extends StatelessWidget {
   final String resultText;
-  final String interpretation;
+  final String bmi;
+  final String advise;
+  final Color textColor;
+
+  const ResultPage({
+    super.key,
+    required this.textColor,
+    required this.resultText,
+    required this.bmi,
+    required this.advise,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'BMI CALCULATOR',
+        title: const Center(
+          child: Text(
+            'BMI CALCULATOR',
+          ),
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(
                 15.0,
               ),
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomCenter,
               child: const Text(
                 'Your Result',
-                style: kTitleTextStyle,
+                style: ktitleTextStyle,
               ),
             ),
           ),
           Expanded(
             flex: 5,
-            child: ReusableCard(
-              color: kActiveCardColor,
+            child: ReusableBg(
+              colour: kactiveCardColor,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Text(
-                    resultText.toUpperCase(),
-                    style: kResultTextStyle,
+                    resultText,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 27.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
-                    bmiResult,
+                    bmi,
                     style: kBMITextStyle,
                   ),
+                  const Text(
+                    'Normal BMI range:',
+                    style: klabelTextStyle,
+                  ),
+                  const Text(
+                    '18.5 - 25 kg/m2',
+                    style: kBodyTextStyle,
+                  ),
                   Text(
-                    interpretation,
+                    advise,
                     textAlign: TextAlign.center,
                     style: kBodyTextStyle,
                   ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  RawMaterialButton(
+                    onPressed: () {},
+                    constraints: const BoxConstraints.tightFor(
+                      width: 200.0,
+                      height: 56.0,
+                    ),
+                    fillColor: const Color(
+                      0xFF4C4F5E,
+                    ),
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        10.0,
+                      ),
+                    ),
+                    child: const Text(
+                      'SAVE RESULT',
+                      style: kBodyTextStyle,
+                    ),
+                  ),
                 ],
               ),
-              onPress: () {
-                Navigator.pop(context);
-              },
             ),
           ),
-          BottomButton(
-            buttonTitle: 'RE-CALCULATE',
+          BottomContainer(
+            text: 'RE-CALCULATE',
             onTap: () {
               Navigator.pop(
                 context,

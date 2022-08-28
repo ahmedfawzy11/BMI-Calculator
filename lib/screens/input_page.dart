@@ -1,206 +1,214 @@
-import 'package:bmi_calculator/Components/calculator_brain.dart';
-import 'package:bmi_calculator/Components/constants.dart';
-import 'package:bmi_calculator/Widgets/bottom_button.dart';
-import 'package:bmi_calculator/Widgets/icon_content.dart';
-import 'package:bmi_calculator/Widgets/reusable_card.dart';
-import 'package:bmi_calculator/Widgets/round_icon_button.dart';
-import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:bmi_calculator/Components/BottomContainer_Button.dart';
+import 'package:bmi_calculator/Components/Icon_Content.dart';
+import 'package:bmi_calculator/Components/Reusable_Bg.dart';
+import 'package:bmi_calculator/Components/RoundIcon_Button.dart';
+import 'package:bmi_calculator/Screens/Results_Page.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum Gender {
-  male,
-  female,
-}
-
+// ignore: must_be_immutable
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
+  // ignore: library_private_types_in_public_api
 
   @override
   // ignore: library_private_types_in_public_api
   _InputPageState createState() => _InputPageState();
 }
 
-class _InputPageState extends State<InputPage> {
-  late Gender selectedGender;
-  int height = 180;
-  int weight = 60;
-  int age = 20;
+//ENUMERATION : The action of establishing number of something , implicit way
+enum Gender {
+  male,
+  female,
+}
 
+class _InputPageState extends State<InputPage> {
+  //by default male will be selected
+  late Gender selectedGender = Gender.male;
+  int height = 180;
+  int weight = 50;
+  int age = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kinactiveCardColor,
       appBar: AppBar(
-        title: const Text(
-          'BMI CALCULATOR',
+        title: const Center(
+          child: Text(
+            'BMI CALCULATOR',
+          ),
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           Expanded(
-              child: Row(
-            children: <Widget>[
-              Expanded(
-                child: ReusableCard(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = Gender.male;
-                    });
-                  },
-                  color: selectedGender == Gender.male
-                      ? kActiveCardColor
-                      : kInactiveCardColor,
-                  cardChild: const IconContent(
-                    icon: FontAwesomeIcons.mars,
-                    label: 'MALE',
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(
+                        () {
+                          selectedGender = Gender.male;
+                        },
+                      );
+                    },
+                    child: ReusableBg(
+                      colour: selectedGender == Gender.male
+                          ? kactiveCardColor
+                          : kinactiveCardColor,
+                      cardChild: const IconContent(
+                        myicon: FontAwesomeIcons.mars,
+                        text: 'MALE',
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ReusableCard(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = Gender.female;
-                    });
-                  },
-                  color: selectedGender == Gender.female
-                      ? kActiveCardColor
-                      : kInactiveCardColor,
-                  cardChild: const IconContent(
-                    icon: FontAwesomeIcons.venus,
-                    label: 'FEMALE',
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(
+                        () {
+                          selectedGender = Gender.female;
+                        },
+                      );
+                    },
+                    child: ReusableBg(
+                      colour: selectedGender == Gender.female
+                          ? kactiveCardColor
+                          : kinactiveCardColor,
+                      cardChild: const IconContent(
+                        myicon: FontAwesomeIcons.venus,
+                        text: 'FEMALE',
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            ),
+          ),
           Expanded(
-            child: ReusableCard(
-              color: kActiveCardColor,
+            child: ReusableBg(
+              colour: kactiveCardColor,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   const Text(
                     'HEIGHT',
-                    style: kLabelTextStyle,
+                    style: klabelTextStyle,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
-                    children: <Widget>[
+                    children: [
                       Text(
                         height.toString(),
-                        style: kNumberTextStyle,
+                        style: kDigitTextStyle,
                       ),
                       const Text(
                         'cm',
-                        style: kLabelTextStyle,
-                      )
+                        style: klabelTextStyle,
+                      ),
                     ],
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      inactiveTrackColor: const Color(
-                        0xFF8D8E98,
-                      ),
                       activeTrackColor: Colors.white,
-                      thumbColor: const Color(
-                        0xFFEB1555,
-                      ),
-                      overlayColor: const Color(
-                        0x29EB1555,
-                      ),
+                      inactiveTrackColor: ksliderInactiveColor,
+                      thumbColor: const Color(0xFFEB1555),
+                      overlayColor: const Color(0x29EB1555),
                       thumbShape: const RoundSliderThumbShape(
                         enabledThumbRadius: 15.0,
                       ),
                       overlayShape: const RoundSliderOverlayShape(
-                        overlayRadius: 30.0,
+                        overlayRadius: 35.0,
                       ),
                     ),
                     child: Slider(
                       value: height.toDouble(),
-                      min: 120.0,
-                      max: 220.0,
+                      min: 120,
+                      max: 220,
                       onChanged: (double newValue) {
-                        setState(() {
-                          height = newValue.round();
-                        });
+                        setState(
+                          () {
+                            height = newValue.round();
+                          },
+                        );
                       },
                     ),
                   ),
                 ],
               ),
-              onPress: () {
-                Navigator.pop(context);
-              },
             ),
           ),
           Expanded(
             child: Row(
-              children: <Widget>[
+              children: [
                 Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColor,
+                  child: ReusableBg(
+                    colour: kactiveCardColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: [
                         const Text(
                           'WEIGHT',
-                          style: kLabelTextStyle,
+                          style: klabelTextStyle,
                         ),
                         Text(
                           weight.toString(),
-                          style: kNumberTextStyle,
+                          style: kDigitTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
+                          children: [
                             RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
-                                    weight--;
-                                  });
-                                }),
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
                             const SizedBox(
-                              width: 10.0,
+                              width: 15.0,
                             ),
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
+                                setState(
+                                  () {
+                                    weight++;
+                                  },
+                                );
                               },
                             ),
                           ],
                         ),
                       ],
                     ),
-                    onPress: () {
-                      Navigator.pop(context);
-                    },
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    color: kActiveCardColor,
+                  child: ReusableBg(
+                    colour: kactiveCardColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: [
                         const Text(
                           'AGE',
-                          style: kLabelTextStyle,
+                          style: klabelTextStyle,
                         ),
                         Text(
                           age.toString(),
-                          style: kNumberTextStyle,
+                          style: kDigitTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
+                          children: [
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
@@ -211,43 +219,41 @@ class _InputPageState extends State<InputPage> {
                                 );
                               },
                             ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
+                            const SizedBox(width: 15.0),
                             RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(
+                                  () {
                                     age++;
-                                  });
-                                })
+                                  },
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ],
                     ),
-                    onPress: () {
-                      Navigator.pop(context);
-                    },
                   ),
                 ),
               ],
             ),
           ),
-          BottomButton(
-            buttonTitle: 'CALCULATE',
+          BottomContainer(
+            text: 'CALCULATE',
             onTap: () {
-              CalculatorBrain calc = CalculatorBrain(
+              Calculate calc = Calculate(
                 height: height,
                 weight: weight,
               );
-
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ResultsPage(
-                    bmiResult: calc.calculateBMI(),
-                    resultText: calc.getResult(),
-                    interpretation: calc.getInterpretation(),
+                  builder: (context) => ResultPage(
+                    bmi: calc.result(),
+                    resultText: calc.getText(),
+                    advise: calc.getAdvise(),
+                    textColor: calc.getTextColor(),
                   ),
                 ),
               );
