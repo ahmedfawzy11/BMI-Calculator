@@ -1,9 +1,14 @@
+// ignore_for_file: file_names
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 class Calculate {
-  Calculate({required this.height, required this.weight});
+  Calculate({
+    required this.height,
+    required this.weight,
+  });
   final int height;
   final int weight;
   double _bmi = 0;
@@ -13,7 +18,9 @@ class Calculate {
           height / 100,
           2,
         ));
-    return _bmi.toStringAsFixed(1);
+    return _bmi.toStringAsFixed(
+      1,
+    );
   }
 
   String getText() {

@@ -1,6 +1,8 @@
-import 'package:bmi_calculator/Components/BottomContainer_Button.dart';
-import 'package:bmi_calculator/Components/Reusable_Bg.dart';
-import 'package:bmi_calculator/constants.dart';
+// ignore_for_file: file_names
+
+import 'package:bmi_calculator/Components/bottomContainerButton.dart';
+import 'package:bmi_calculator/Components/reusableBg.dart';
+import 'package:bmi_calculator/Service/constants.dart';
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
@@ -18,7 +20,9 @@ class ResultPage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(

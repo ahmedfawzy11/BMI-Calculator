@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class RoundIconButton extends StatelessWidget {
@@ -10,7 +12,9 @@ class RoundIconButton extends StatelessWidget {
     required this.onPressed,
   });
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return RawMaterialButton(
       constraints: const BoxConstraints.tightFor(
         width: 56.0,

@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/Service/constants.dart';
 import 'package:flutter/material.dart';
 
 const sizedBox = SizedBox(
@@ -16,7 +16,9 @@ class IconContent extends StatelessWidget {
     required this.text,
   });
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

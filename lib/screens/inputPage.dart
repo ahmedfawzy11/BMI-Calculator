@@ -1,16 +1,20 @@
-import 'package:bmi_calculator/Components/BottomContainer_Button.dart';
-import 'package:bmi_calculator/Components/Icon_Content.dart';
-import 'package:bmi_calculator/Components/Reusable_Bg.dart';
-import 'package:bmi_calculator/Components/RoundIcon_Button.dart';
-import 'package:bmi_calculator/Screens/Results_Page.dart';
-import 'package:bmi_calculator/calculator_brain.dart';
-import 'package:bmi_calculator/constants.dart';
+// ignore_for_file: file_names
+
+import 'package:bmi_calculator/Components/bottomContainerButton.dart';
+import 'package:bmi_calculator/Components/iconContent.dart';
+import 'package:bmi_calculator/Components/reusableBg.dart';
+import 'package:bmi_calculator/Components/roundIconButton.dart';
+import 'package:bmi_calculator/Screens/resultsPage.dart';
+import 'package:bmi_calculator/Service/calculatorBrain.dart';
+import 'package:bmi_calculator/Service/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+  const InputPage({
+    super.key,
+  });
   // ignore: library_private_types_in_public_api
 
   @override
@@ -31,7 +35,9 @@ class _InputPageState extends State<InputPage> {
   int weight = 50;
   int age = 20;
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       backgroundColor: kinactiveCardColor,
       appBar: AppBar(
@@ -116,11 +122,17 @@ class _InputPageState extends State<InputPage> {
                     ],
                   ),
                   SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
+                    data: SliderTheme.of(
+                      context,
+                    ).copyWith(
                       activeTrackColor: Colors.white,
                       inactiveTrackColor: ksliderInactiveColor,
-                      thumbColor: const Color(0xFFEB1555),
-                      overlayColor: const Color(0x29EB1555),
+                      thumbColor: const Color(
+                        0xFFEB1555,
+                      ),
+                      overlayColor: const Color(
+                        0x29EB1555,
+                      ),
                       thumbShape: const RoundSliderThumbShape(
                         enabledThumbRadius: 15.0,
                       ),
@@ -219,7 +231,9 @@ class _InputPageState extends State<InputPage> {
                                 );
                               },
                             ),
-                            const SizedBox(width: 15.0),
+                            const SizedBox(
+                              width: 15.0,
+                            ),
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
@@ -249,7 +263,10 @@ class _InputPageState extends State<InputPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ResultPage(
+                  builder: (
+                    context,
+                  ) =>
+                      ResultPage(
                     bmi: calc.result(),
                     resultText: calc.getText(),
                     advise: calc.getAdvise(),

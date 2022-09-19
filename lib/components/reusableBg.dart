@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class ReusableBg extends StatelessWidget {
@@ -11,7 +13,9 @@ class ReusableBg extends StatelessWidget {
   final Widget cardChild;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Container(
       margin: const EdgeInsets.all(
         16.0,
